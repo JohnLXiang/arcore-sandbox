@@ -44,7 +44,6 @@ import de.javagl.obj.ObjGroup;
 import de.javagl.obj.ObjReader;
 import de.javagl.obj.ObjUtils;
 
-
 /**
  * Renders an object loaded from an OBJ file in OpenGL.
  */
@@ -340,6 +339,27 @@ public class ObjectRenderer {
                     textureBitmap.recycle();
 
                 }
+
+                //Read ambient value
+                int red = (int) (targetMat.getKa().getX() * 256) << 16;
+                int green = (int) (targetMat.getKa().getY() * 256) << 16;
+                int blue = (int) (targetMat.getKa().getZ() * 256) << 16;
+                mAmbient = (0xFF << 24 | red | green | blue);
+
+                //Read diffuse value
+                red = (int) (targetMat.getKa().getX() * 256) << 16;
+                green = (int) (targetMat.getKa().getY() * 256) << 16;
+                blue = (int) (targetMat.getKa().getZ() * 256) << 16;
+                mDiffuse = (0xFF << 24 | red | green | blue);
+
+                //Read specular value
+                red = (int) (targetMat.getKs().getX() * 256) << 16;
+                green = (int) (targetMat.getKs().getY() * 256) << 16;
+                blue = (int) (targetMat.getKs().getZ() * 256) << 16;
+                mSpecular = (0xFF << 24 | red | green | blue);
+
+                mSpecularPower = targetMat.getNs();
+
                 ShaderUtil.checkGLError(TAG, "Texture loading");
             }
 
@@ -562,8 +582,7 @@ public class ObjectRenderer {
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
         }
 
-        if (mBlendMode != null)
-        {
+        if (mBlendMode != null) {
             GLES20.glDisable(GLES20.GL_BLEND);
             GLES20.glDepthMask(true);
         }
