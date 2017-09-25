@@ -74,6 +74,8 @@ public class HelloArActivity extends AppCompatActivity implements GLSurfaceView.
     private ObjectRenderer mFerrariRenderer = new ObjectRenderer(FERRARI);
     private ObjectRenderer mCastleRenderer = new ObjectRenderer(Castle);
     private ObjectRenderer mCastle2Renderer = new ObjectRenderer(Castle2);
+    private int mIndex = 0;
+    private int mIncreament = 1;
 
     private PlaneRenderer mPlaneRenderer = new PlaneRenderer();
 
@@ -248,12 +250,11 @@ public class HelloArActivity extends AppCompatActivity implements GLSurfaceView.
                 for (HitResult hit : frame.hitTest(tap)) {
                     // Check if any plane was hit, and if it was hit inside the plane polygon.
                     if (hit instanceof PlaneHitResult && ((PlaneHitResult) hit).isHitInPolygon()) {
-                        // Cap the number of objects created. This avoids overloading both the
-                        // rendering system and ARCore.
                         if (mTouches.size() >= 16) {
                             mSession.removeAnchors(Arrays.asList(mTouches.get(0).getAnchor()));
                             mTouches.remove(0);
                         }
+
                         // Adding an Anchor tells ARCore that it should track this position in
                         // space. This anchor will be used in PlaneAttachment to place the 3d model
                         // in the correct position relative both to the world and to the plane.c
@@ -316,8 +317,22 @@ public class HelloArActivity extends AppCompatActivity implements GLSurfaceView.
                 mCastle2Renderer.updateModelMatrix(mAnchorMatrix, 0.005f);
                 mCastleRenderer.updateModelMatrix(mAnchorMatrix, 0.01f);
 
-                //TODO: Currently hardcoded to render 1 object each frame.
-                mCastleRenderer.draw(viewmtx, projmtx, lightIntensity);
+                int mod = mTouches.indexOf(planeAttachment) % 4;
+                switch (mod) {
+                    case 0:
+                        mLexusRenderer.draw(viewmtx, projmtx, lightIntensity);
+                        break;
+                    case 1:
+                        mFerrariRenderer.draw(viewmtx, projmtx, lightIntensity);
+                        break;
+                    case 2:
+                        mCastle2Renderer.draw(viewmtx, projmtx, lightIntensity);
+                        break;
+                    case 3:
+                        mCastleRenderer.draw(viewmtx, projmtx, lightIntensity);
+                        break;
+                }
+
             }
 
         } catch (Throwable t) {
