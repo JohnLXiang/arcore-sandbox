@@ -74,9 +74,7 @@ public class HelloArActivity extends AppCompatActivity implements GLSurfaceView.
     private ObjectRenderer mFerrariRenderer = new ObjectRenderer(FERRARI);
     private ObjectRenderer mCastleRenderer = new ObjectRenderer(Castle);
     private ObjectRenderer mCastle2Renderer = new ObjectRenderer(Castle2);
-    private int mIndex = 0;
-    private int mIncreament = 1;
-
+   
     private PlaneRenderer mPlaneRenderer = new PlaneRenderer();
 
     // Temporary matrix allocated here to reduce number of allocations for each frame.
