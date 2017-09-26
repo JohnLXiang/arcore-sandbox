@@ -342,20 +342,20 @@ public class ObjectRenderer {
 
                 //Read ambient value
                 int red = (int) (targetMat.getKa().getX() * 256) << 16;
-                int green = (int) (targetMat.getKa().getY() * 256) << 16;
-                int blue = (int) (targetMat.getKa().getZ() * 256) << 16;
+                int green = (int) (targetMat.getKa().getY() * 256) << 8;
+                int blue = (int) (targetMat.getKa().getZ() * 256);
                 mAmbient = (0xFF << 24 | red | green | blue);
 
                 //Read diffuse value
                 red = (int) (targetMat.getKa().getX() * 256) << 16;
-                green = (int) (targetMat.getKa().getY() * 256) << 16;
-                blue = (int) (targetMat.getKa().getZ() * 256) << 16;
+                green = (int) (targetMat.getKa().getY() * 256) << 8;
+                blue = (int) (targetMat.getKa().getZ() * 256);
                 mDiffuse = (0xFF << 24 | red | green | blue);
 
                 //Read specular value
                 red = (int) (targetMat.getKs().getX() * 256) << 16;
-                green = (int) (targetMat.getKs().getY() * 256) << 16;
-                blue = (int) (targetMat.getKs().getZ() * 256) << 16;
+                green = (int) (targetMat.getKs().getY() * 256) << 8;
+                blue = (int) (targetMat.getKs().getZ() * 256);
                 mSpecular = (0xFF << 24 | red | green | blue);
 
                 mSpecularPower = targetMat.getNs();
