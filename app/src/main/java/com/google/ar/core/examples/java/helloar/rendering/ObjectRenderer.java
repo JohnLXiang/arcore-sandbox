@@ -347,9 +347,9 @@ public class ObjectRenderer {
                 mAmbient = (0xFF << 24 | red | green | blue);
 
                 //Read diffuse value
-                red = (int) (targetMat.getKa().getX() * 256) << 16;
-                green = (int) (targetMat.getKa().getY() * 256) << 8;
-                blue = (int) (targetMat.getKa().getZ() * 256);
+                red = (int) (targetMat.getKd().getX() * 256) << 16;
+                green = (int) (targetMat.getKd().getY() * 256) << 8;
+                blue = (int) (targetMat.getKd().getZ() * 256);
                 mDiffuse = (0xFF << 24 | red | green | blue);
 
                 //Read specular value
