@@ -549,8 +549,7 @@ public class ObjectRenderer {
         //Start drawing data from each VAO
         for (int i = 0; i < mObj.getNumMaterialGroups(); i++) {
             // Attach the object texture.
-            GLES20.glUniform1i(mTextureUniform, i);
-            GLES20.glActiveTexture(GLES20.GL_TEXTURE0 + i);
+            GLES20.glUniform1i(mTextureUniform, 0);
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextures[i]);
 
             GLES30.glBindVertexArray(vectorArrayObjectIds[i]);
